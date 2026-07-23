@@ -1,0 +1,12 @@
+import ChartJs, { ChartData, ChartDataSets, CommonAxe, ChartConfiguration, ChartOptions } from 'chart.js';
+import { Dataset, Axis } from './interfaces';
+export declare function getAxisType(type: string): ChartJs.ScaleType;
+export declare function getAxisLabel(item: Axis): ChartJs.ScaleTitleOptions;
+export declare function axisMapper(item: Axis): ChartJs.CommonAxe;
+export declare function getAxes(axes: Axis[], stacked: boolean): CommonAxe[];
+export declare function getChartDataset(dataset: Dataset): ChartDataSets;
+export declare function getChartDatasets(datasets: Dataset[]): ChartDataSets[];
+export declare function getLabelsFromDataset(datasets: Dataset[]): string[];
+export declare function getChartData(datasets: Dataset[]): ChartData;
+export declare function getCommonChartOptions(title: string | undefined, titleFontSize: number | undefined, titleFontColor: string | undefined): ChartOptions;
+export declare function getCommonChartConfigurations(type: string, title: string | undefined, titleFontSize: number | undefined, titleFontColor: string | undefined, datasets: Dataset[]): ChartConfiguration;

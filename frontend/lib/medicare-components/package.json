@@ -1,0 +1,49 @@
+{
+  "name": "@medicare/components",
+  "version": "3.4.0",
+  "description": "MediCare Management System — UI Component Library",
+  "license": "MIT",
+  "author": "Team CODE CRASH — Brainwave Hackathon",
+  "main": "dist",
+  "module": "dist/components.esm.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "scss",
+    "!main.scss"
+  ],
+  "peerDependencies": {
+    "bootstrap": "~4.6.0",
+    "react": "~16.14.0",
+    "react-bootstrap": "~1.0.1"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-common-types": "~0.2.28",
+    "@fortawesome/fontawesome-svg-core": "~1.2.25",
+    "@fortawesome/free-regular-svg-icons": "~5.14.0",
+    "@fortawesome/free-solid-svg-icons": "~5.14.0",
+    "@fortawesome/react-fontawesome": "~0.1.9",
+    "@fullcalendar/core": "~4.4.2",
+    "@fullcalendar/daygrid": "~4.4.2",
+    "@fullcalendar/interaction": "~4.4.2",
+    "@fullcalendar/react": "~4.4.2",
+    "@fullcalendar/timegrid": "~4.4.2",
+    "@tinymce/tinymce-react": "~3.7.0",
+    "@types/classnames": "~2.2.10",
+    "@types/react-bootstrap-typeahead": "^5.1.0",
+    "@types/react-datepicker": "~3.1.0",
+    "chart.js": "~2.9.3",
+    "classnames": "~2.2.6",
+    "date-fns": "~2.16.0",
+    "formik": "~2.2.0",
+    "lodash": "~4.17.19",
+    "moment": "~2.29.0",
+    "react-bootstrap-typeahead": "^4.2.3",
+    "react-datepicker": "~3.4.0",
+    "react-spinners": "~0.10.1",
+    "react-table": "~7.6.0",
+    "react-toastify": "~5.5.0",
+    "tinymce": "~5.6.0",
+    "video-react": "~0.14.1"
+  }
+}

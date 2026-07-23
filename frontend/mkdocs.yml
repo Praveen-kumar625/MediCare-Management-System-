@@ -1,0 +1,13 @@
+site_name: MediCare Management System
+site_url: https://github.com/Praveen-kumar625/MediCare-Management-System-
+site_description: MediCare Management System — AI-Powered Healthcare Management Platform Documentation
+site_author: Praveen Kumar Jayswal — Team CODE CRASH
+
+repo_url: https://github.com/Praveen-kumar625/MediCare-Management-System-/
+
+theme:
+  name: readthedocs
+  highlightjs: true
+
+plugins:
+  - search
