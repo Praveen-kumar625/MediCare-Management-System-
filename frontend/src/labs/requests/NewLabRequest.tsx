@@ -1,4 +1,4 @@
-﻿import {
+import {
   Select,
   Typeahead,
   Label,
@@ -119,7 +119,7 @@ const NewLabRequest = () => {
       )
       setError(undefined)
     } catch (e) {
-      setError(e)
+      setError(e as LabError)
     }
   }
 

@@ -1,4 +1,4 @@
-﻿import { Modal } from '@medicare/components'
+import { Modal } from '@medicare/components'
 import addMonths from 'date-fns/addMonths'
 import React, { useState, useEffect } from 'react'
 
@@ -47,7 +47,7 @@ const AddVisitModal = ({ show, onCloseButtonClick, patientId }: Props) => {
       await mutate({ patientId, visit })
       onClose()
     } catch (e) {
-      setError(e)
+      setError(e as Error)
     }
   }
 

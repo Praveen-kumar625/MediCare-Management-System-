@@ -1,4 +1,4 @@
-﻿import { Button, Row, Column, Typeahead, Label } from '@medicare/components'
+import { Button, Row, Column, Typeahead, Label } from '@medicare/components'
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 
@@ -59,7 +59,7 @@ const ReportIncident = () => {
       const data = await mutate(incident as Incident)
       history.push(`/incidents/${data?.id}`)
     } catch (e) {
-      setError(e)
+      setError(e as IncidentError)
     }
   }
 

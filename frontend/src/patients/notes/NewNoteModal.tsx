@@ -1,4 +1,4 @@
-﻿import { Modal, Alert } from '@medicare/components'
+import { Modal, Alert } from '@medicare/components'
 import React, { useState } from 'react'
 
 import TextFieldWithLabelFormGroup from '../../shared/components/input/TextFieldWithLabelFormGroup'
@@ -36,7 +36,7 @@ const NewNoteModal = (props: Props) => {
       setNote(initialNoteState)
       onCloseButtonClick()
     } catch (e) {
-      setNoteError(e)
+      setNoteError(e as NoteError)
     }
   }
 

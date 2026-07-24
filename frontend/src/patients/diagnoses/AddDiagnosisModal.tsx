@@ -1,4 +1,4 @@
-﻿import { Modal } from '@medicare/components'
+import { Modal } from '@medicare/components'
 import React, { useState, useEffect } from 'react'
 
 import useTranslator from '../../shared/hooks/useTranslator'
@@ -43,7 +43,7 @@ const AddDiagnosisModal = (props: NewDiagnosisModalProps) => {
       await mutate({ diagnosis, patientId: patient.id })
       onCloseButtonClick()
     } catch (e) {
-      setDiagnosisError(e)
+      setDiagnosisError(e as DiagnosisError)
     }
   }
 

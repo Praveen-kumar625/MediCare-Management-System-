@@ -122,7 +122,7 @@ export const login = (username: string, password: string): AppThunk => async (di
           password: 'user.login.error.password.required',
         }),
       )
-    } else if (error.status === 401) {
+    } else if ((error as any).status === 401) {
       dispatch(
         loginError({
           message: 'user.login.error.message.incorrect',

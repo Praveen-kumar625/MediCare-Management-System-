@@ -1,4 +1,4 @@
-﻿import { Panel, Spinner, TabsHeader, Tab, Button } from '@medicare/components'
+import { Panel, Spinner, TabsHeader, Tab, Button } from '@medicare/components'
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import {
@@ -39,7 +39,7 @@ const ViewPatient = () => {
   const { path } = useRouteMatch()
   const setButtonToolBar = useButtonToolbarSetter()
 
-  const { id } = useParams()
+  const { id } = useParams<any>()
   const { permissions } = useSelector((state: RootState) => state.user)
   const { data: patient, status } = usePatient(id)
 

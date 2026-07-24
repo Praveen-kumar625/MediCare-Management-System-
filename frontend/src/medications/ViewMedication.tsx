@@ -1,4 +1,4 @@
-﻿import { Select, Row, Column, Badge, Button, Alert, Label } from '@medicare/components'
+import { Select, Row, Column, Badge, Button, Alert, Label } from '@medicare/components'
 import format from 'date-fns/format'
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
@@ -20,7 +20,7 @@ const getTitle = (patient: Patient | undefined, medication: Medication | undefin
   patient && medication ? `${medication.medication} for ${patient.fullName}` : ''
 
 const ViewMedication = () => {
-  const { id } = useParams()
+  const { id } = useParams<any>()
   const { t } = useTranslator()
   const history = useHistory()
   const dispatch = useDispatch()

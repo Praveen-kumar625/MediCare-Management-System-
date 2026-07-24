@@ -1,6 +1,6 @@
 import { Parser } from 'json2csv'
 
-export function getCSV<T>(data: T[]): string {
+export function getCSV<T extends object>(data: T[]): string {
   const fields = Object.keys(data[0])
   const opts = { fields }
   const parser = new Parser(opts)

@@ -1,4 +1,4 @@
-﻿import { Modal, Alert } from '@medicare/components'
+import { Modal, Alert } from '@medicare/components'
 import React, { useState, useEffect } from 'react'
 
 import TextInputWithLabelFormGroup from '../../shared/components/input/TextInputWithLabelFormGroup'
@@ -34,7 +34,7 @@ const NewAllergyModal = (props: NewAllergyModalProps) => {
       await mutate({ patientId, allergy })
       onCloseButtonClick()
     } catch (e) {
-      setAllergyError(e)
+      setAllergyError(e as AllergyError)
     }
   }
 

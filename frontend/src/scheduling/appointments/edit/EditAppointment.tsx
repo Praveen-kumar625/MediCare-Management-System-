@@ -1,4 +1,4 @@
-﻿import { Spinner, Button, Toast } from '@medicare/components'
+import { Spinner, Button, Toast } from '@medicare/components'
 import isEmpty from 'lodash/isEmpty'
 import React, { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
@@ -15,7 +15,7 @@ import { getAppointmentLabel } from '../util/scheduling-appointment.util'
 
 const EditAppointment = () => {
   const { t } = useTranslator()
-  const { id } = useParams()
+  const { id } = useParams<any>()
 
   const updateTitle = useUpdateTitle()
   useEffect(() => {

@@ -1,4 +1,4 @@
-﻿import { Modal, Alert, Typeahead, Label } from '@medicare/components'
+import { Modal, Alert, Typeahead, Label } from '@medicare/components'
 import format from 'date-fns/format'
 import React, { useState } from 'react'
 
@@ -65,7 +65,7 @@ const AddRelatedPersonModal = (props: Props) => {
       await mutate({ patientId, relatedPerson })
       onCloseButtonClick()
     } catch (e) {
-      setRelatedPersonError(e)
+      setRelatedPersonError(e as RelatedPersonError)
     }
   }
 

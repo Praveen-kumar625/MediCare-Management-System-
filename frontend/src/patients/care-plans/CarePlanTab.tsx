@@ -1,4 +1,4 @@
-﻿import { Button } from '@medicare/components'
+import { Button } from '@medicare/components'
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Route, Switch, useParams } from 'react-router-dom'
@@ -13,7 +13,7 @@ import ViewCarePlan from './ViewCarePlan'
 import ViewCarePlans from './ViewCarePlans'
 
 const CarePlanTab = () => {
-  const { id: patientId } = useParams()
+  const { id: patientId } = useParams<any>()
   const { t } = useTranslator()
   const { permissions } = useSelector((state: RootState) => state.user)
   const { data, status } = usePatient(patientId)

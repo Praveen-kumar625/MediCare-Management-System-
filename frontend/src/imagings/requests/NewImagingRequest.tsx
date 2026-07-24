@@ -1,4 +1,4 @@
-﻿import { Select, Typeahead, Label, Button, Alert, Column, Row } from '@medicare/components'
+import { Select, Typeahead, Label, Button, Alert, Column, Row } from '@medicare/components'
 import format from 'date-fns/format'
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
@@ -112,7 +112,7 @@ const NewImagingRequest = () => {
       await mutate(newImagingRequest)
       history.push(`/imaging`)
     } catch (e) {
-      setError(e)
+      setError(e as ImagingRequestError)
     }
   }
 

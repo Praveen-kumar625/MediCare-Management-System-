@@ -1,4 +1,4 @@
-﻿import { List, ListItem, Icon } from '@medicare/components'
+import { List, ListItem, Icon } from '@medicare/components'
 import React, { useState, CSSProperties } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useLocation, useHistory } from 'react-router-dom'
@@ -65,9 +65,9 @@ const Sidebar = () => {
     fontSize: 'small',
     borderBottomWidth: 0,
     borderTopWidth: 0,
-    color: 'black',
+    color: '#94a3b8',
     padding: '.6rem 1.25rem',
-    backgroundColor: 'rgba(245,245,245,1)',
+    backgroundColor: 'transparent',
   }
 
   const listSubItemStyleNew: CSSProperties = {
@@ -75,9 +75,9 @@ const Sidebar = () => {
     fontSize: 'small',
     borderBottomWidth: 0,
     borderTopWidth: 0,
-    color: 'black',
+    color: '#94a3b8',
     padding: '.6rem 1.25rem',
-    backgroundColor: 'rgba(245,245,245,1)',
+    backgroundColor: 'transparent',
   }
 
   const getDashboardLink = () => (
@@ -414,8 +414,8 @@ const Sidebar = () => {
 
   return (
     <nav
-      className="d-none d-md-block bg-light sidebar"
-      style={{ width: sidebarCollapsed ? '56px' : '' }}
+      className="d-none d-md-block sidebar"
+      style={{ width: sidebarCollapsed ? '68px' : '' }}
     >
       <div className="sidebar-sticky">
         <List layout="flush" className="nav flex-column">

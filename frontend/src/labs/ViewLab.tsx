@@ -1,4 +1,4 @@
-﻿import { Row, Column, Badge, Button, Alert, Toast, Callout, Label } from '@medicare/components'
+import { Row, Column, Badge, Button, Alert, Toast, Callout, Label } from '@medicare/components'
 import format from 'date-fns/format'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -24,7 +24,7 @@ const getTitle = (patient: Patient | undefined, lab: Lab | undefined) =>
   patient && lab ? `${lab.type} for ${patient.fullName}(${lab.code})` : ''
 
 const ViewLab = () => {
-  const { id } = useParams()
+  const { id } = useParams<any>()
   const { t } = useTranslator()
   const history = useHistory()
   const { permissions } = useSelector((state: RootState) => state.user)
@@ -133,7 +133,7 @@ const ViewLab = () => {
       }
       setError(undefined)
     } catch (e) {
-      setError(e)
+      setError(e as LabError)
     }
   }
 

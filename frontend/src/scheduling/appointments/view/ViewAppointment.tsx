@@ -1,4 +1,4 @@
-﻿import { Spinner, Button, Modal, Toast } from '@medicare/components'
+import { Spinner, Button, Modal, Toast } from '@medicare/components'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
@@ -25,7 +25,7 @@ const ViewAppointment = () => {
     }
   }, [updateTitle, t])
 
-  const { id } = useParams()
+  const { id } = useParams<any>()
   const history = useHistory()
   const [deleteMutate] = useDeleteAppointment()
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState<boolean>(false)
