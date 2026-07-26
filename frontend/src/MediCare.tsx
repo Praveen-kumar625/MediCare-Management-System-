@@ -2,6 +2,7 @@ import { Toaster } from '@medicare/components'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 import Dashboard from './dashboard/Dashboard'
 import Imagings from './imagings/Imagings'
@@ -25,55 +26,54 @@ const MediCare = () => {
   const { sidebarCollapsed } = useSelector((state: RootState) => state.components)
 
   return (
-    <div>
+    <div className="mc-app-wrapper">
       <NetworkStatusMessage />
       <Navbar />
-      <div className="container-fluid" style={{ paddingLeft: 0 }}>
-        <div className="col-md-2" style={{ padding: 0 }}>
-          <Sidebar />
-        </div>
+      
+      <div className="mc-layout">
+        <Sidebar />
+        
         <ButtonBarProvider>
-          <div className="row" style={{ marginLeft: 0, marginRight: 0 }}>
-            <main
-              role="main"
-              className={`mc-main-content ${
-                sidebarCollapsed ? 'col-md-10 col-lg-11' : 'col-md-9 col-lg-10'
-              } ml-sm-auto px-4`}
-            >
-              <div className="mc-page-header d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
-                <h1 className="h2">{title}</h1>
-                <ButtonToolBar />
-              </div>
-              <Breadcrumbs />
-              <div>
-                <Switch>
-                  <Route exact path="/" component={Dashboard} />
-                  <Route path="/appointments" component={Appointments} />
-                  <Route path="/patients" component={Patients} />
-                  <Route path="/labs" component={Labs} />
-                  <Route path="/medications" component={Medications} />
-                  <Route path="/incidents" component={Incidents} />
-                  <Route path="/settings" component={Settings} />
-                  <Route path="/imaging" component={Imagings} />
-                </Switch>
-              </div>
-              <Toaster autoClose={5000} hideProgressBar draggable />
+          <motion.main
+            layout
+            initial={false}
+            animate={{ 
+              marginLeft: sidebarCollapsed ? 80 : 260 
+            }}
+            transition={{ type: "spring", bounce: 0.1, duration: 0.4 }}
+            className="mc-main-content"
+            role="main"
+          >
+            <div className="mc-page-header">
+              <h1 className="mc-page-title">{title}</h1>
+              <ButtonToolBar />
+            </div>
+            
+            <Breadcrumbs />
+            
+            <div className="mc-page-body">
+              <Switch>
+                <Route exact path="/" component={Dashboard} />
+                <Route path="/appointments" component={Appointments} />
+                <Route path="/patients" component={Patients} />
+                <Route path="/labs" component={Labs} />
+                <Route path="/medications" component={Medications} />
+                <Route path="/incidents" component={Incidents} />
+                <Route path="/settings" component={Settings} />
+                <Route path="/imaging" component={Imagings} />
+              </Switch>
+            </div>
+            
+            <Toaster autoClose={5000} hideProgressBar draggable />
 
-              {/* Footer */}
-              <footer className="mc-footer">
-                MediCare Management System &copy; {new Date().getFullYear()} &mdash; Built
-                by{' '}
-                <a
-                  href="https://github.com/Praveen-kumar625/MediCare-Management-System-"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Team CODE CRASH
-                </a>{' '}
-                for Brainwave Hackathon
-              </footer>
-            </main>
-          </div>
+            <footer className="mc-footer">
+              <div className="mc-footer-content">
+                <span>MediCare Management System &copy; {new Date().getFullYear()}</span>
+                <span className="mc-footer-divider">•</span>
+                <span>Built by <a href="https://github.com/Praveen-kumar625/MediCare-Management-System-" target="_blank" rel="noopener noreferrer">Team CODE CRASH</a> for Brainwave Hackathon</span>
+              </div>
+            </footer>
+          </motion.main>
         </ButtonBarProvider>
       </div>
     </div>

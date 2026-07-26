@@ -1,4 +1,5 @@
 import { Panel, Spinner, TabsHeader, Tab, Button } from '@medicare/components'
+import { motion } from 'framer-motion'
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import {
@@ -84,10 +85,16 @@ const ViewPatient = () => {
   }
 
   return (
-    <div>
-      {' '}
-      <ImportantPatientInfo patient={patient} />
-      <div>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+      style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}
+    >
+      <div className="mc-card" style={{ padding: '24px' }}>
+        <ImportantPatientInfo patient={patient} />
+      </div>
+      <div className="mc-card" style={{ padding: '0', overflow: 'hidden' }}>
         <TabsHeader>
           <Tab
             active={location.pathname === `/patients/${patient.id}`}
@@ -150,46 +157,48 @@ const ViewPatient = () => {
             onClick={() => history.push(`/patients/${patient.id}/history`)}
           />
         </TabsHeader>
-        <Panel>
-          <Route exact path={path}>
-            <GeneralInformation patient={patient} />
-          </Route>
-          <Route exact path={`${path}/relatedpersons`}>
-            <RelatedPerson patient={patient} />
-          </Route>
-          <Route exact path={`${path}/appointments`}>
-            <AppointmentsList patient={patient} />
-          </Route>
-          <Route path={`${path}/allergies`}>
-            <Allergies patient={patient} />
-          </Route>
-          <Route path={`${path}/diagnoses`}>
-            <Diagnoses />
-          </Route>
-          <Route exact path={`${path}/notes`}>
-            <Note patient={patient} />
-          </Route>
-          <Route exact path={`${path}/medications`}>
-            <Medications patient={patient} />
-          </Route>
-          <Route exact path={`${path}/labs`}>
-            <Labs patient={patient} />
-          </Route>
-          <Route path={`${path}/care-plans`}>
-            <CarePlanTab />
-          </Route>
-          <Route path={`${path}/care-goals`}>
-            <CareGoalTab />
-          </Route>
-          <Route path={`${path}/visits`}>
-            <VisitTab patientId={patient.id} />
-          </Route>
-          <Route path={`${path}/history`}>
-            <HistoryTab patientId={patient.id} />
-          </Route>
-        </Panel>
+        <div style={{ padding: '24px' }}>
+          <Panel>
+            <Route exact path={path}>
+              <GeneralInformation patient={patient} />
+            </Route>
+            <Route exact path={`${path}/relatedpersons`}>
+              <RelatedPerson patient={patient} />
+            </Route>
+            <Route exact path={`${path}/appointments`}>
+              <AppointmentsList patient={patient} />
+            </Route>
+            <Route path={`${path}/allergies`}>
+              <Allergies patient={patient} />
+            </Route>
+            <Route path={`${path}/diagnoses`}>
+              <Diagnoses />
+            </Route>
+            <Route exact path={`${path}/notes`}>
+              <Note patient={patient} />
+            </Route>
+            <Route exact path={`${path}/medications`}>
+              <Medications patient={patient} />
+            </Route>
+            <Route exact path={`${path}/labs`}>
+              <Labs patient={patient} />
+            </Route>
+            <Route path={`${path}/care-plans`}>
+              <CarePlanTab />
+            </Route>
+            <Route path={`${path}/care-goals`}>
+              <CareGoalTab />
+            </Route>
+            <Route path={`${path}/visits`}>
+              <VisitTab patientId={patient.id} />
+            </Route>
+            <Route path={`${path}/history`}>
+              <HistoryTab patientId={patient.id} />
+            </Route>
+          </Panel>
+        </div>
       </div>
-    </div>
+    </motion.div>
   )
 }
 

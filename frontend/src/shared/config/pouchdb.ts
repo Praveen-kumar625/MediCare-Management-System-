@@ -5,8 +5,8 @@ import PouchAuth from 'pouchdb-authentication'
 import PouchdbFind from 'pouchdb-find'
 import RelationalPouch from 'relational-pouch'
 
-const memoryAdapter = require('pouchdb-adapter-memory')
-const search = require('pouchdb-quick-search')
+import memoryAdapter from 'pouchdb-adapter-memory'
+import search from 'pouchdb-quick-search'
 
 PouchDB.plugin(search)
 PouchDB.plugin(memoryAdapter)

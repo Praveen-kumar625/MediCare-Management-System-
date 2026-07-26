@@ -1,4 +1,5 @@
-﻿import { Button, Toast } from '@medicare/components'
+import { Button, Toast } from '@medicare/components'
+import { motion } from 'framer-motion'
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
@@ -90,20 +91,25 @@ const NewPatient = () => {
   }
 
   return (
-    <div>
-      <GeneralInformation
-        patient={patient}
-        isEditable
-        onChange={onPatientChange}
-        error={createError}
-      />
-      <div className="row float-right">
-        <div className="btn-group btn-group-lg mt-3 mr-3">
-          <Button className="btn-save mr-2" color="success" onClick={onSave}>
-            {t('patients.createPatient')}
-          </Button>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+    >
+      <div className="mc-card" style={{ padding: '24px' }}>
+        <h3 style={{ marginBottom: '24px', color: 'var(--mc-text)' }}>{t('patients.newPatient')}</h3>
+        <GeneralInformation
+          patient={patient}
+          isEditable
+          onChange={onPatientChange}
+          error={createError}
+        />
+        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px', marginTop: '32px' }}>
           <Button className="btn-cancel" color="danger" onClick={onCancel}>
             {t('actions.cancel')}
+          </Button>
+          <Button className="btn-save" color="success" onClick={onSave}>
+            {t('patients.createPatient')}
           </Button>
         </div>
       </div>
@@ -115,7 +121,7 @@ const NewPatient = () => {
         onContinueButtonClick={createDuplicateNewPatient}
         onCloseButtonClick={closeDuplicateNewPatientModal}
       />
-    </div>
+    </motion.div>
   )
 }
 

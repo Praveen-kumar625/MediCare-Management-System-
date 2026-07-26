@@ -1,136 +1,163 @@
-﻿import { Navbar as MediCareNavbar } from '@medicare/components'
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+import { motion, AnimatePresence } from 'framer-motion'
+import { 
+  Bell, 
+  Search, 
+  Settings, 
+  LogOut, 
+  Plus, 
+  User as UserIcon,
+  Menu,
+  ChevronDown
+} from 'lucide-react'
 
 import { logout } from '../../../user/user-slice'
 import useTranslator from '../../hooks/useTranslator'
 import { RootState } from '../../store'
-import pageMap, { Page } from './pageMap'
+import { cn } from '../../../utils/cn'
 
 const Navbar = () => {
   const dispatch = useDispatch()
   const history = useHistory()
   const { t } = useTranslator()
-  const { permissions, user } = useSelector((state: RootState) => state.user)
+  const { user } = useSelector((state: RootState) => state.user)
+
+  const [isProfileOpen, setIsProfileOpen] = useState(false)
+  const [isAddOpen, setIsAddOpen] = useState(false)
 
   const navigateTo = (location: string) => {
     history.push(location)
+    setIsProfileOpen(false)
+    setIsAddOpen(false)
   }
 
-  const dividerAboveLabels = [
-    'scheduling.appointments.new',
-    'labs.requests.new',
-    'medications.requests.new',
-    'incidents.reports.new',
-    'imagings.requests.new',
-    'settings.label',
-  ]
-
-  function getDropdownListOfPages(pages: Page[]) {
-    return pages
-      .filter((page) => !page.permission || permissions.includes(page.permission))
-      .map((page) => ({
-        type: 'link',
-        label: t(page.label),
-        icon: `${page.icon}`,
-        onClick: () => {
-          navigateTo(page.path)
-        },
-        dividerAbove: dividerAboveLabels.includes(page.label),
-      }))
+  const handleLogout = () => {
+    dispatch(logout())
+    navigateTo('/login')
   }
-
-  // For Mobile, hamburger menu
-  const hambergerPages = Object.keys(pageMap).map((key) => pageMap[key])
-
-  // For Desktop, add shortcuts menu
-  const addPages = [
-    pageMap.newPatient,
-    pageMap.newAppointment,
-    pageMap.newMedication,
-    pageMap.newLab,
-    pageMap.newImaging,
-    pageMap.newIncident,
-  ]
 
   return (
-    <MediCareNavbar
-      bg="dark"
-      variant="dark"
-      navItems={[
-        {
-          name: 'menu',
-          size: 'lg',
-          type: 'link-list-icon',
-          children: getDropdownListOfPages(hambergerPages),
-          label: '',
-          className: 'nav-hamberger pr-4 d-md-none',
-        },
-        {
-          type: 'image',
-          src:
-            'data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53%0D%0AMy5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5r%0D%0AIiB2aWV3Qm94PSIwIDAgMjk5IDI5OSI+PGRlZnM+PHN0eWxlPi5jbHMtMXtmaWxsOnVybCgjbGlu%0D%0AZWFyLWdyYWRpZW50KTt9PC9zdHlsZT48bGluZWFyR3JhZGllbnQgaWQ9ImxpbmVhci1ncmFkaWVu%0D%0AdCIgeDE9IjcyLjU4IiB5MT0iMTYuMDQiIHgyPSIyMjcuMzEiIHkyPSIyODQuMDIiIGdyYWRpZW50%0D%0AVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAuMDEiIHN0b3AtY29sb3I9IiM2%0D%0AMGQxYmIiLz48c3RvcCBvZmZzZXQ9IjAuNSIgc3RvcC1jb2xvcj0iIzFhYmM5YyIvPjxzdG9wIG9m%0D%0AZnNldD0iMSIgc3RvcC1jb2xvcj0iIzAwOWI5ZSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjx0%0D%0AaXRsZT5jcm9zcy1pY29uPC90aXRsZT48cGF0aCBpZD0iY3Jvc3MiIGNsYXNzPSJjbHMtMSIgZD0i%0D%0ASTI5Mi45NCw5Ny40NkgyMDUuM1Y3LjA2QTYuNTYsNi41NiwwLDAsMCwxOTguNzQuNUgxMDEuMjZB%0D%0ANi41Niw2LjU2LDAsMCwwLDk0LjcsNy4wNnY5MC40SDcuMDZBNi41OCw2LjU4LDAsMCwwLC41LDEw%0D%0ANFYxOTYuM2E2LjIzLDYuMjMsMCwwLDAsNi4yMyw2LjI0aDg4djkwLjRhNi41Niw2LjU2LDAsMCww%0D%0ALDYuNTYsNi41Nmg5Ny40OGE2LjU2LDYuNTYsMCwwLDAsNi41Ni02LjU2di05MC40aDg4YTYuMjMs%0D%0ANi4yMywwLDAsMCw2LjIzLTYuMjRWMTA0QTYuNTgsNi41OCwwLDAsMCwyOTIuOTQsOTcuNDZaIiB0%0D%0AcmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIi8+PC9zdmc+',
-          onClick: () => {
-            navigateTo('/')
-          },
-          className: 'nav-icon',
-        },
-        {
-          type: 'header',
-          label: 'MediCare',
-          onClick: () => {
-            navigateTo('/')
-          },
-          className: 'nav-header',
-        },
-        {
-          type: 'link-list-icon',
-          alignRight: true,
-          children: getDropdownListOfPages(addPages),
-          className: 'ml-auto nav-add-new d-none d-md-block',
-          iconClassName: 'align-bottom',
-          label: 'Add',
-          name: 'add',
-          size: 'lg',
-        },
-        {
-          type: 'link-list-icon',
-          alignRight: true,
-          children: [
-            {
-              type: 'link',
-              label: `${t('user.login.currentlySignedInAs')} ${user?.givenName} ${
-                user?.familyName
-              }`,
-              onClick: () => {
-                navigateTo('/settings')
-              },
-            },
-            {
-              type: 'link',
-              label: t('settings.label'),
-              onClick: () => {
-                navigateTo('/settings')
-              },
-            },
-            {
-              type: 'link',
-              label: t('actions.logout'),
-              onClick: () => {
-                dispatch(logout())
-                navigateTo('/login')
-              },
-            },
-          ],
-          className: 'pl-2 d-none d-md-block nav-account',
-          iconClassName: 'align-bottom',
-          label: 'Patient',
-          name: 'patient',
-          size: 'lg',
-        },
-      ]}
-    />
+    <header className="mc-navbar">
+      <div className="mc-navbar-left d-md-none">
+        <button className="mc-icon-btn">
+          <Menu size={20} />
+        </button>
+      </div>
+
+      <div className="mc-navbar-search d-none d-md-flex">
+        <div className="mc-search-wrapper">
+          <Search size={16} className="mc-search-icon" />
+          <input 
+            type="text" 
+            placeholder="Search everything..." 
+            className="mc-search-input"
+          />
+          <div className="mc-search-shortcut">⌘K</div>
+        </div>
+      </div>
+
+      <div className="mc-navbar-right">
+        {/* Quick Add Menu */}
+        <div className="mc-dropdown-container">
+          <button 
+            className="mc-btn mc-btn-primary mc-btn-sm"
+            onClick={() => setIsAddOpen(!isAddOpen)}
+          >
+            <Plus size={16} />
+            <span className="d-none d-md-inline">New</span>
+          </button>
+
+          <AnimatePresence>
+            {isAddOpen && (
+              <>
+                <div className="mc-dropdown-overlay" onClick={() => setIsAddOpen(false)} />
+                <motion.div
+                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                  transition={{ duration: 0.15 }}
+                  className="mc-dropdown-menu"
+                >
+                  <div className="mc-dropdown-header">Quick Actions</div>
+                  <button onClick={() => navigateTo('/patients/new')} className="mc-dropdown-item">
+                    New Patient
+                  </button>
+                  <button onClick={() => navigateTo('/appointments/new')} className="mc-dropdown-item">
+                    New Appointment
+                  </button>
+                  <button onClick={() => navigateTo('/medications/new')} className="mc-dropdown-item">
+                    New Medication
+                  </button>
+                  <button onClick={() => navigateTo('/labs/new')} className="mc-dropdown-item">
+                    New Lab Request
+                  </button>
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* Notifications */}
+        <button className="mc-icon-btn mc-notifications-btn">
+          <Bell size={18} />
+          <span className="mc-indicator" />
+        </button>
+
+        {/* User Profile */}
+        <div className="mc-dropdown-container">
+          <button 
+            className="mc-profile-trigger"
+            onClick={() => setIsProfileOpen(!isProfileOpen)}
+          >
+            <div className="mc-avatar">
+              {user?.givenName?.charAt(0) || 'U'}
+            </div>
+            <div className="mc-profile-info d-none d-md-flex">
+              <span className="mc-profile-name">{user?.givenName} {user?.familyName}</span>
+              <span className="mc-profile-role">Administrator</span>
+            </div>
+            <ChevronDown size={14} className="mc-profile-chevron d-none d-md-block" />
+          </button>
+
+          <AnimatePresence>
+            {isProfileOpen && (
+              <>
+                <div className="mc-dropdown-overlay" onClick={() => setIsProfileOpen(false)} />
+                <motion.div
+                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                  transition={{ duration: 0.15 }}
+                  className="mc-dropdown-menu mc-dropdown-menu-right"
+                >
+                  <div className="mc-dropdown-header">
+                    <div className="font-medium">{user?.givenName} {user?.familyName}</div>
+                    <div className="text-xs text-muted">admin@medicare.com</div>
+                  </div>
+                  <div className="mc-dropdown-divider" />
+                  <button onClick={() => navigateTo('/settings')} className="mc-dropdown-item">
+                    <UserIcon size={14} className="mr-2" />
+                    My Profile
+                  </button>
+                  <button onClick={() => navigateTo('/settings')} className="mc-dropdown-item">
+                    <Settings size={14} className="mr-2" />
+                    {t('settings.label')}
+                  </button>
+                  <div className="mc-dropdown-divider" />
+                  <button onClick={handleLogout} className="mc-dropdown-item mc-text-danger">
+                    <LogOut size={14} className="mr-2" />
+                    {t('actions.logout')}
+                  </button>
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>
+        </div>
+      </div>
+    </header>
   )
 }
+
 export default Navbar
